@@ -39,9 +39,15 @@ export default function Navbar() {
   useEffect(() => {
     if (mobileOpen) {
       document.body.style.overflow = "hidden";
-      const id = requestAnimationFrame(() => setMenuShown(true));
+      // Double rAF so the initial (off-screen) state paints before we flip to
+      // the shown state — guarantees the slide-in transition actually runs.
+      let inner = 0;
+      const outer = requestAnimationFrame(() => {
+        inner = requestAnimationFrame(() => setMenuShown(true));
+      });
       return () => {
-        cancelAnimationFrame(id);
+        cancelAnimationFrame(outer);
+        cancelAnimationFrame(inner);
         document.body.style.overflow = "";
       };
     }
@@ -171,8 +177,8 @@ export default function Navbar() {
                     key={link.label}
                     href={link.href}
                     onClick={closeMenu}
-                    className={`group flex items-center justify-between border-b border-white/10 py-4 font-display text-2xl uppercase tracking-wide text-white/90 transition-all duration-500 hover:text-[#E8A020] ${
-                      menuShown ? "opacity-100 translate-x-0" : "opacity-0 translate-x-6"
+                    className={`group flex items-center justify-between border-b border-white/10 py-4 font-display text-2xl uppercase tracking-wide text-white/90 transition-[transform,color] duration-500 motion-reduce:transition-none hover:text-[#E8A020] ${
+                      menuShown ? "translate-x-0" : "translate-x-6"
                     }`}
                     style={{ transitionDelay: `${120 + i * 70}ms` }}
                   >
@@ -187,8 +193,8 @@ export default function Navbar() {
 
               {/* CTAs */}
               <div
-                className={`mt-8 flex flex-col gap-3 transition-all duration-500 ${
-                  menuShown ? "opacity-100 translate-y-0" : "opacity-0 translate-y-4"
+                className={`mt-8 flex flex-col gap-3 transition-transform duration-500 motion-reduce:transition-none ${
+                  menuShown ? "translate-y-0" : "translate-y-4"
                 }`}
                 style={{ transitionDelay: `${120 + allLinks.length * 70 + 60}ms` }}
               >
