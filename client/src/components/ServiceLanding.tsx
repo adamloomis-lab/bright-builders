@@ -1,5 +1,7 @@
+import { useState } from "react";
 import { Phone, Check, ShieldCheck, MapPin, Clock, Star } from "lucide-react";
 import Navbar from "@/components/Navbar";
+import Lightbox from "@/components/Lightbox";
 import Footer from "@/components/Footer";
 import Awards from "@/components/Awards";
 import QuoteForm from "@/components/QuoteForm";
@@ -16,6 +18,7 @@ const trust = [
 
 export default function ServiceLanding({ config }: { config: ServiceLandingConfig }) {
   const url = `${SITE_URL}/${config.slug}`;
+  const [lightboxIndex, setLightboxIndex] = useState<number | null>(null);
 
   useSeo({
     title: config.seoTitle,
@@ -163,8 +166,14 @@ export default function ServiceLanding({ config }: { config: ServiceLandingConfi
                 <div className="w-16 h-[3px] bg-[#E8A020] mx-auto mt-4" />
               </div>
               <div className="grid grid-cols-2 md:grid-cols-3 gap-3 sm:gap-4">
-                {config.gallery.map((img) => (
-                  <div key={img.src} className="group overflow-hidden">
+                {config.gallery.map((img, i) => (
+                  <button
+                    key={img.src}
+                    type="button"
+                    onClick={() => setLightboxIndex(i)}
+                    aria-label={`View larger: ${img.alt}`}
+                    className="group overflow-hidden block w-full text-left focus-visible:outline focus-visible:outline-2 focus-visible:outline-[#E8A020]"
+                  >
                     <div className="aspect-[4/3] overflow-hidden">
                       <img
                         src={img.src}
@@ -173,11 +182,20 @@ export default function ServiceLanding({ config }: { config: ServiceLandingConfi
                         className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110"
                       />
                     </div>
-                  </div>
+                  </button>
                 ))}
               </div>
             </div>
           </section>
+        )}
+
+        {config.gallery && lightboxIndex !== null && (
+          <Lightbox
+            images={config.gallery}
+            index={lightboxIndex}
+            onClose={() => setLightboxIndex(null)}
+            onNavigate={setLightboxIndex}
+          />
         )}
 
         <Awards />
