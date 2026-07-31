@@ -18,6 +18,7 @@ import ServiceLandingPage from "./pages/ServiceLandingPage";
 import Privacy from "./pages/Privacy";
 import Terms from "./pages/Terms";
 import Accessibility from "./pages/Accessibility";
+import ThankYou from "./pages/ThankYou";
 
 
 function Router() {
@@ -40,6 +41,7 @@ function Router() {
       <Route path={"/privacy"} component={Privacy} />
       <Route path={"/terms"} component={Terms} />
       <Route path={"/accessibility"} component={Accessibility} />
+      <Route path={"/thank-you"} component={ThankYou} />
       <Route path={"/404"} component={NotFound} />
       {/* Final fallback route */}
       <Route component={NotFound} />
