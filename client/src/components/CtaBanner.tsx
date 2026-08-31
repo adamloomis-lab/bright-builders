@@ -3,6 +3,8 @@
  * Design: Industrial Craft — dramatic dark overlay, gold CTA, strong typography
  */
 
+import { Link } from "wouter";
+
 const CTA_IMG = "/assets/cta-exterior-5qhmmdsgaq6lb3sfxvyqtl.webp";
 
 export default function CtaBanner() {
@@ -35,14 +37,12 @@ export default function CtaBanner() {
           Whether you're looking to buy, sell, renovate, or build from the ground up, our team is ready to make your vision a reality. Schedule a call today and let's get started.
         </p>
         <div className="mt-10 flex flex-col sm:flex-row items-center justify-center gap-4">
-          <a
-            href="https://www.brightbuilderscorp.com/"
-            target="_blank"
-            rel="noopener noreferrer"
+          <Link
+            href="/contact"
             className="font-display text-sm tracking-[0.2em] bg-[#E8A020] text-[#1A1A1A] px-8 py-4 hover:bg-[#d4920b] transition-all duration-300 font-semibold"
           >
             CONTACT US
-          </a>
+          </Link>
           <a
             href="tel:+13307859056"
             className="font-display text-sm tracking-[0.2em] border-2 border-white/40 text-white px-8 py-4 hover:border-[#E8A020] hover:text-[#E8A020] transition-all duration-300"
