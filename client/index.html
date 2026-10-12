@@ -5,31 +5,25 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
-    <!-- Microsoft Clarity -->
-    <script type="text/javascript">
-      (function(c,l,a,r,i,t,y){
-        c[a]=c[a]||function(){(c[a].q=c[a].q||[]).push(arguments)};
-        t=l.createElement(r);t.async=1;t.src="https://www.clarity.ms/tag/"+i;
-        y=l.getElementsByTagName(r)[0];y.parentNode.insertBefore(t,y);
-      })(window, document, "clarity", "script", "wy8fsabi9h");
-    </script>
-
-    <!-- Google Tag Manager -->
-    <script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
-    new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
-    j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
-    'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
-    })(window,document,'script','dataLayer','GTM-WVTTM2PL');</script>
-    <!-- End Google Tag Manager -->
-
-    <!-- Google tag (gtag.js): GA4 + Google Ads -->
-    <script async src="https://www.googletagmanager.com/gtag/js?id=G-LSP04FQ2XK"></script>
+    <!-- Trackers wait for consent. Nothing below runs until the visitor clicks
+         Accept on the cookie banner (stored as localStorage "cookie-consent"). Loading
+         them on page open, before consent, is what California wiretap (CIPA)
+         suits target. The banner calls window.loadTrackers() on Accept. -->
     <script>
-      window.dataLayer = window.dataLayer || [];
-      function gtag(){dataLayer.push(arguments);}
-      gtag('js', new Date());
-      gtag('config', 'G-LSP04FQ2XK');
-      gtag('config', 'AW-16544961172');
+      (function () {
+        function load() {
+          if (window.__trackersLoaded) return;
+          window.__trackersLoaded = true;
+          (function(c,l,a,r,i,t,y){c[a]=c[a]||function(){(c[a].q=c[a].q||[]).push(arguments)};t=l.createElement(r);t.async=1;t.src="https://www.clarity.ms/tag/"+i;y=l.getElementsByTagName(r)[0];y.parentNode.insertBefore(t,y);})(window,document,"clarity","script","wy8fsabi9h");
+          (function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src='https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);})(window,document,'script','dataLayer','GTM-WVTTM2PL');
+          var g=document.createElement('script');g.async=true;g.src='https://www.googletagmanager.com/gtag/js?id=G-LSP04FQ2XK';document.head.appendChild(g);
+          window.dataLayer=window.dataLayer||[];window.gtag=function(){dataLayer.push(arguments);};gtag('js',new Date());
+          gtag('config','G-LSP04FQ2XK');
+          gtag('config','AW-16544961172');
+        }
+        window.loadTrackers = load;
+        try { if (localStorage.getItem("cookie-consent") === "accepted") load(); } catch (e) {}
+      })();
     </script>
 
     <title>Bright Builders Corp | Custom Homes, Remodeling &amp; Real Estate in NE Ohio</title>
@@ -85,10 +79,6 @@
   </head>
 
   <body>
-    <!-- Google Tag Manager (noscript) -->
-    <noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-WVTTM2PL"
-    height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
-    <!-- End Google Tag Manager (noscript) -->
     <div id="root"></div>
 
     <!-- Netlify form detection (build bot scans static HTML, not the JS-rendered DOM) -->

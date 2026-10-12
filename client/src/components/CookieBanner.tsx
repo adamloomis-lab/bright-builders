@@ -16,6 +16,8 @@ export default function CookieBanner() {
 
   function accept() {
     localStorage.setItem(STORAGE_KEY, "accepted");
+    // Trackers in index.html wait for this; start them now.
+    (window as unknown as { loadTrackers?: () => void }).loadTrackers?.();
     setVisible(false);
   }
 
